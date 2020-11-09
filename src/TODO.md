@@ -1,0 +1,8 @@
+- kotlinFixture 적용
+- queryDsl 적용
+- swagger 적용
+- 카카오싱크 적용
+- multi module로 변경
+- spring batch 추가
+- flyway 적용
+- 분산 트랜잭션 적용
