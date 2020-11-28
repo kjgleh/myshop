@@ -1,5 +1,8 @@
 package me.kjgleh.yes25.domain
 
+import au.com.console.kassava.kotlinEquals
+import au.com.console.kassava.kotlinHashCode
+import au.com.console.kassava.kotlinToString
 import java.util.*
 import javax.persistence.*
 
@@ -13,4 +16,19 @@ class Book(
     val publisher: Publisher
 ) {
     val uuid: String = UUID.randomUUID().toString()
+
+    companion object {
+        private val equalsAndHashCodeProperties = arrayOf(Book::id)
+        private val toStringProperties= arrayOf(
+            Book::id,
+            Book::title,
+            Book::uuid
+        )
+    }
+
+    override fun equals(other: Any?) = kotlinEquals(other = other, properties = equalsAndHashCodeProperties)
+
+    override fun toString() = kotlinToString(properties = toStringProperties)
+
+    override fun hashCode() = kotlinHashCode(properties = equalsAndHashCodeProperties)
 }
