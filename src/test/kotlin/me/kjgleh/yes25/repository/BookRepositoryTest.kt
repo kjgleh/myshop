@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager
 import org.springframework.data.repository.findByIdOrNull
+import java.util.*
 
 @DataJpaTest
 internal class BookRepositoryTest @Autowired constructor(
@@ -72,5 +73,15 @@ internal class BookRepositoryTest @Autowired constructor(
         assertThat(bookSaved).isNotNull
         assertThat(bookSaved?.title).isEqualTo(book.title)
         assertThat(bookSaved?.publisher?.name).isEqualTo(book.publisher.name)
+    }
+
+    @Test
+    fun `when book doesn't exist then return null`() {
+        // Act
+        val sut = bookRepository
+        val actual = sut.findByUuid(UUID.randomUUID().toString())
+
+        // Assert
+        assertThat(actual).isNull()
     }
 }
