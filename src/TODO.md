@@ -6,3 +6,4 @@
 - spring batch 추가
 - flyway 적용
 - 분산 트랜잭션 적용
+- redis
