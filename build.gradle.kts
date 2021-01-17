@@ -52,6 +52,7 @@ allOpen {
 /*
 https://kotlinlang.org/docs/reference/compiler-plugins.html#no-arg-compiler-plugin
 https://kotlinlang.org/docs/reference/compiler-plugins.html#jpa-support
+As with the kotlin-spring plugin wrapped on top of all-open, kotlin-jpa is wrapped on top of no-arg. The plugin specifies @Entity, @Embeddable and @MappedSuperclass no-arg annotations automatically.
 noArg {
     annotation("javax.persistence.Entity")
 }*/
