@@ -14,4 +14,15 @@ class OrderLine(
 
     @Suppress("JpaAttributeTypeInspection")
     val amounts: Money
-)
+) {
+    companion object {
+        fun of(productId: Long, price: Money, quantity: Int): OrderLine {
+            return OrderLine(
+                productId = productId,
+                price = price,
+                quantity = quantity,
+                amounts = price.multiply(quantity)
+            )
+        }
+    }
+}

@@ -6,12 +6,10 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager
 
 @DataJpaTest
 internal class OrderRepositoryTest @Autowired constructor(
-    private val orderRepository: OrderRepository,
-    private val entityManager: TestEntityManager
+    private val orderRepository: OrderRepository
 ) {
 
     companion object {
@@ -26,10 +24,6 @@ internal class OrderRepositoryTest @Autowired constructor(
         // Act
         val sut = orderRepository
         sut.save(order)
-
-        entityManager.flush()
-        entityManager.clear()
-
         val actual = sut.findAll()
 
         // Assert
