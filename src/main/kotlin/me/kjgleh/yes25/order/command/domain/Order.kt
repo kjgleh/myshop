@@ -1,6 +1,7 @@
 package me.kjgleh.yes25.order.command.domain
 
-import me.kjgleh.yes25.order.command.dto.OrderRequest
+import me.kjgleh.yes25.order.command.service.dto.MemberInfo
+import me.kjgleh.yes25.order.command.service.dto.OrderInfo
 import javax.persistence.*
 
 @Entity
@@ -26,30 +27,28 @@ class Order(
 
     companion object {
         fun of(
-            orderNo: OrderNo,
-            orderRequest: OrderRequest,
-            memberName: String,
-            orderLines: List<OrderLine>
+            orderInfo: OrderInfo,
+            memberInfo: MemberInfo
         ): Order {
             return Order(
-                orderNo = orderNo,
+                orderNo = orderInfo.orderNo,
                 orderer = Orderer(
-                    memberId = orderRequest.orderer.memberId,
-                    name = memberName
+                    memberId = memberInfo.id,
+                    name = memberInfo.name
                 ),
                 shippingInfo = ShippingInfo(
                     address = Address(
-                        zipCode = orderRequest.shippingInfo.address.zipCode,
-                        address1 = orderRequest.shippingInfo.address.address1,
-                        address2 = orderRequest.shippingInfo.address.address2
+                        zipCode = orderInfo.orderRequest.shippingInfo.address.zipCode,
+                        address1 = orderInfo.orderRequest.shippingInfo.address.address1,
+                        address2 = orderInfo.orderRequest.shippingInfo.address.address2
                     ),
                     receiver = Receiver(
-                        name = orderRequest.shippingInfo.receiver.name,
-                        phone = orderRequest.shippingInfo.receiver.phone
+                        name = orderInfo.orderRequest.shippingInfo.receiver.name,
+                        phone = orderInfo.orderRequest.shippingInfo.receiver.phone
                     ),
-                    message = orderRequest.shippingInfo.message
+                    message = orderInfo.orderRequest.shippingInfo.message
                 ),
-                orderLines = orderLines
+                orderLines = orderInfo.orderLines
             )
         }
     }

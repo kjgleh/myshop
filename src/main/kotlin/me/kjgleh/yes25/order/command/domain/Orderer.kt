@@ -1,12 +1,13 @@
 package me.kjgleh.yes25.order.command.domain
 
+import me.kjgleh.yes25.member.domain.MemberId
 import javax.persistence.Column
 import javax.persistence.Embeddable
 
 @Embeddable
 class Orderer(
     @Column(name = "orderer_id")
-    val memberId: String,
+    val memberId: MemberId,
 
     @Column(name = "orderer_name")
     val name: String

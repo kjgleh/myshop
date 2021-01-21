@@ -1,11 +1,14 @@
 package me.kjgleh.yes25.order.command.service
 
 import me.kjgleh.yes25.catalog.repository.ProductRepository
+import me.kjgleh.yes25.member.domain.MemberId
 import me.kjgleh.yes25.order.command.domain.Order
 import me.kjgleh.yes25.order.command.domain.OrderLine
 import me.kjgleh.yes25.order.command.domain.OrderNo
 import me.kjgleh.yes25.order.command.dto.OrderRequest
 import me.kjgleh.yes25.order.command.repository.OrderRepository
+import me.kjgleh.yes25.order.command.service.dto.MemberInfo
+import me.kjgleh.yes25.order.command.service.dto.OrderInfo
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -19,6 +22,7 @@ class PlaceOrderService(
     fun placeOrder(
         orderNo: OrderNo,
         orderRequest: OrderRequest,
+        memberId: MemberId,
         memberName: String
     ) {
         val orderLines = orderRequest.orderProducts.map {
@@ -31,7 +35,10 @@ class PlaceOrderService(
                 quantity = it.quantity
             )
         }
-        val order = Order.of(orderNo, orderRequest, memberName, orderLines)
+        val order = Order.of(
+            OrderInfo(orderNo, orderRequest, orderLines),
+            MemberInfo(memberId, memberName)
+        )
         orderRepository.save(order)
     }
 }

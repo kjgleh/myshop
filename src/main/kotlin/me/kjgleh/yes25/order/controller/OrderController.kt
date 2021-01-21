@@ -1,5 +1,6 @@
 package me.kjgleh.yes25.order.controller
 
+import me.kjgleh.yes25.member.domain.MemberId
 import me.kjgleh.yes25.member.repository.MemberRepository
 import me.kjgleh.yes25.order.command.domain.OrderNo
 import me.kjgleh.yes25.order.command.dto.OrderRequest
@@ -17,10 +18,11 @@ class OrderController(
     @PostMapping
     fun order(@RequestBody orderRequest: OrderRequest) {
         val orderNo = OrderNo.nextOrderNo()
-        val member = memberRepository.findById(orderRequest.orderer.memberId)
-            .orElseThrow {
-                IllegalArgumentException("This member id does not exist.")
-            }
-        placeOrderService.placeOrder(orderNo, orderRequest, member.name)
+        val member =
+            memberRepository.findById(MemberId(orderRequest.orderer.memberId))
+                .orElseThrow {
+                    IllegalArgumentException("This member id does not exist.")
+                }
+        placeOrderService.placeOrder(orderNo, orderRequest, member.id, member.name)
     }
 }
