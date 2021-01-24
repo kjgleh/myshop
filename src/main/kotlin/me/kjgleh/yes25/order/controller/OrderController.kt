@@ -17,6 +17,8 @@ class OrderController(
 
     @PostMapping
     fun order(@RequestBody orderRequest: OrderRequest) {
+        OrderRequestValidator.validate(orderRequest)
+
         val member =
             memberRepository.findById(MemberId(orderRequest.orderer.memberId))
                 .orElseThrow {
