@@ -20,11 +20,10 @@ class PlaceOrderService(
 
     @Transactional
     fun placeOrder(
-        orderNo: OrderNo,
         orderRequest: OrderRequest,
-        memberId: MemberId,
-        memberName: String
-    ) {
+        memberInfo: MemberInfo
+    ): OrderNo {
+        val orderNo = OrderNo.nextOrderNo()
         val orderLines = orderRequest.orderProducts.map {
             val product = productRepository.findById(it.productId).orElseThrow {
                 IllegalArgumentException("This product id does not exist.")
@@ -37,8 +36,10 @@ class PlaceOrderService(
         }
         val order = Order.of(
             OrderInfo(orderNo, orderRequest, orderLines),
-            MemberInfo(memberId, memberName)
+            memberInfo
         )
         orderRepository.save(order)
+
+        return orderNo
     }
 }

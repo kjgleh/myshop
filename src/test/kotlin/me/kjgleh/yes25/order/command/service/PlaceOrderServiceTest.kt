@@ -4,9 +4,11 @@ import com.appmattus.kotlinfixture.kotlinFixture
 import com.nhaarman.mockitokotlin2.any
 import me.kjgleh.yes25.catalog.repository.ProductRepository
 import me.kjgleh.yes25.config.IntegrationTestConfiguration
+import me.kjgleh.yes25.member.domain.MemberId
 import me.kjgleh.yes25.order.command.domain.OrderNo
 import me.kjgleh.yes25.order.command.dto.OrderRequest
 import me.kjgleh.yes25.order.command.repository.OrderRepository
+import me.kjgleh.yes25.order.command.service.dto.MemberInfo
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito
@@ -34,9 +36,11 @@ internal class PlaceOrderServiceTest @Autowired constructor(
     @Test
     fun `place order`() {
         // Arrange
-        val orderNo = OrderNo.nextOrderNo()
         val orderRequest = kotlinFixture<OrderRequest>()
-        val memberName = UUID.randomUUID().toString()
+        val memberInfo = MemberInfo(
+            id = MemberId(UUID.randomUUID().toString()),
+            name = UUID.randomUUID().toString()
+        )
 
         Mockito.`when`(productRepository.findById(any())).thenReturn(
             Optional.of(kotlinFixture())
@@ -44,10 +48,9 @@ internal class PlaceOrderServiceTest @Autowired constructor(
 
         // Act
         val sut = placeOrderService
-        sut.placeOrder(
-            orderNo = orderNo,
+        val orderNo = sut.placeOrder(
             orderRequest = orderRequest,
-            memberName = memberName
+            memberInfo = memberInfo
         )
 
         // Assert
