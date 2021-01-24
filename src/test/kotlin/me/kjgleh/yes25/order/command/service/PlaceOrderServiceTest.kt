@@ -48,13 +48,14 @@ internal class PlaceOrderServiceTest @Autowired constructor(
 
         // Act
         val sut = placeOrderService
-        val orderNo = sut.placeOrder(
+        val orderResponse = sut.placeOrder(
             orderRequest = orderRequest,
             memberInfo = memberInfo
         )
 
         // Assert
-        val actual = orderRepository.findByIdOrNull(orderNo)
+        val actual =
+            orderRepository.findByIdOrNull(OrderNo(orderResponse.orderNo))
         assertThat(actual).isNotNull
     }
 }

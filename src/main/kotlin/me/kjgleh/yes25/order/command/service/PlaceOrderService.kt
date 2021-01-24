@@ -9,6 +9,7 @@ import me.kjgleh.yes25.order.command.dto.OrderRequest
 import me.kjgleh.yes25.order.command.repository.OrderRepository
 import me.kjgleh.yes25.order.command.service.dto.MemberInfo
 import me.kjgleh.yes25.order.command.service.dto.OrderInfo
+import me.kjgleh.yes25.order.command.service.dto.OrderResponse
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -22,7 +23,7 @@ class PlaceOrderService(
     fun placeOrder(
         orderRequest: OrderRequest,
         memberInfo: MemberInfo
-    ): OrderNo {
+    ): OrderResponse {
         val orderNo = OrderNo.nextOrderNo()
         val orderLines = orderRequest.orderProducts.map {
             val product = productRepository.findById(it.productId).orElseThrow {
@@ -40,6 +41,6 @@ class PlaceOrderService(
         )
         orderRepository.save(order)
 
-        return orderNo
+        return OrderResponse(orderNo.number)
     }
 }
