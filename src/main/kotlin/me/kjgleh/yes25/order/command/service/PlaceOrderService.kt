@@ -1,12 +1,11 @@
 package me.kjgleh.yes25.order.command.service
 
 import me.kjgleh.yes25.catalog.repository.ProductRepository
-import me.kjgleh.yes25.member.domain.MemberId
 import me.kjgleh.yes25.order.command.domain.Order
 import me.kjgleh.yes25.order.command.domain.OrderLine
 import me.kjgleh.yes25.order.command.domain.OrderNo
 import me.kjgleh.yes25.order.command.dto.OrderRequest
-import me.kjgleh.yes25.order.command.repository.OrderRepository
+import me.kjgleh.yes25.order.infra.OrderRepository
 import me.kjgleh.yes25.order.command.service.dto.MemberInfo
 import me.kjgleh.yes25.order.command.service.dto.OrderInfo
 import me.kjgleh.yes25.order.command.service.dto.OrderResponse

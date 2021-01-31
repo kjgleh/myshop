@@ -7,7 +7,7 @@ import me.kjgleh.yes25.config.IntegrationTestConfiguration
 import me.kjgleh.yes25.member.domain.MemberId
 import me.kjgleh.yes25.order.command.domain.OrderNo
 import me.kjgleh.yes25.order.command.dto.OrderRequest
-import me.kjgleh.yes25.order.command.repository.OrderRepository
+import me.kjgleh.yes25.order.infra.OrderRepository
 import me.kjgleh.yes25.order.command.service.dto.MemberInfo
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test

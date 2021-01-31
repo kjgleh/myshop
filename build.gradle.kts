@@ -1,11 +1,13 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
+    val kotlinVersion = "1.3.72"
     id("org.springframework.boot") version "2.3.5.RELEASE"
     id("io.spring.dependency-management") version "1.0.10.RELEASE"
-    kotlin("jvm") version "1.3.72"
-    kotlin("plugin.spring") version "1.3.72"
-    kotlin("plugin.jpa") version "1.3.72"
+    kotlin("jvm") version kotlinVersion
+    kotlin("plugin.spring") version kotlinVersion
+    kotlin("plugin.jpa") version kotlinVersion
+    kotlin("kapt") version kotlinVersion
 }
 
 group = "me.kjgleh"
@@ -27,6 +29,9 @@ dependencies {
     implementation("io.springfox:springfox-boot-starter:3.0.0")
     compileOnly("io.springfox:springfox-swagger-ui:3.0.0")
     runtimeOnly("com.h2database:h2")
+    val queryDslVersion="4.4.0"
+    implementation("com.querydsl:querydsl-jpa:${queryDslVersion}")
+    kapt ("com.querydsl:querydsl-apt:${queryDslVersion}:jpa")
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }

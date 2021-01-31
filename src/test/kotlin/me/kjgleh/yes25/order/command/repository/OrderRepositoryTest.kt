@@ -2,6 +2,7 @@ package me.kjgleh.yes25.order.command.repository
 
 import com.appmattus.kotlinfixture.kotlinFixture
 import me.kjgleh.yes25.order.command.domain.Order
+import me.kjgleh.yes25.order.infra.OrderRepository
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
