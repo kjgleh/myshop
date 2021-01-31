@@ -12,6 +12,7 @@ class Member(
     val id: MemberId,
 
     val name: String,
+
     @Embedded
     val password: Password
 )

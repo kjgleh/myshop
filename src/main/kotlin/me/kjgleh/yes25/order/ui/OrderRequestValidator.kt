@@ -1,7 +1,7 @@
-package me.kjgleh.yes25.order.controller
+package me.kjgleh.yes25.order.ui
 
 import me.kjgleh.yes25.order.command.dto.OrderRequest
-import me.kjgleh.yes25.order.controller.exception.OrderProductEmptyException
+import me.kjgleh.yes25.order.ui.exception.OrderProductEmptyException
 
 object OrderRequestValidator {
 

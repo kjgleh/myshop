@@ -1,4 +1,4 @@
-package me.kjgleh.yes25.order.controller
+package me.kjgleh.yes25.order.ui
 
 import com.appmattus.kotlinfixture.kotlinFixture
 import me.kjgleh.yes25.order.command.dto.OrderRequest

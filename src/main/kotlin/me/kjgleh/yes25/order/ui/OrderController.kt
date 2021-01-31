@@ -1,4 +1,4 @@
-package me.kjgleh.yes25.order.controller
+package me.kjgleh.yes25.order.ui
 
 import io.swagger.annotations.Api
 import me.kjgleh.yes25.member.domain.MemberId
