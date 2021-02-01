@@ -1,9 +1,15 @@
 package me.kjgleh.yes25.order.infra.dto
 
-data class OrderView(
-//    val number: String,
-//    val ordererId: String,
+import com.querydsl.core.annotations.QueryProjection
+
+data class OrderView @QueryProjection constructor(
+    val number: String,
+    val ordererId: String,
     val ordererName: String
-//    val productId: String,
-//    val productName: String
+//    val orderLines: List<OrderLine>
+)
+
+data class OrderLine constructor(
+    val productId: String,
+    val quantity: Int
 )

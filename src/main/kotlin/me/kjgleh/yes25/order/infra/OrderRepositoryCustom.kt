@@ -5,5 +5,8 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 
 interface OrderRepositoryCustom {
-    fun selectByOrderer(ordererId: String, pageable: Pageable): Page<OrderView>
+    fun selectByOrderer(
+        ordererId: String,
+        pageable: Pageable
+    ): Page<OrderView>
 }
