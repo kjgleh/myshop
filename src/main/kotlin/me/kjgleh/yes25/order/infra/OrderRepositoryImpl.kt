@@ -4,6 +4,7 @@ import com.querydsl.jpa.JPQLQuery
 import com.querydsl.jpa.impl.JPAQueryFactory
 import me.kjgleh.yes25.order.command.domain.Order
 import me.kjgleh.yes25.order.command.domain.QOrder.order
+import me.kjgleh.yes25.order.command.domain.QOrderLine.orderLine
 import me.kjgleh.yes25.order.infra.dto.OrderLine
 import me.kjgleh.yes25.order.infra.dto.OrderView
 import org.springframework.data.domain.Page
@@ -22,6 +23,7 @@ class OrderRepositoryImpl(private val queryFactory: JPAQueryFactory) :
             pageable,
             queryFactory
                 .selectFrom(order)
+                .leftJoin(order.orderLines, orderLine).fetchJoin()
                 .where(order.orderer.memberId.id.eq(ordererId))
         )
 
