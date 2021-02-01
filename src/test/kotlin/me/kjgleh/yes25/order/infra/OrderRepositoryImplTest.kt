@@ -1,7 +1,7 @@
 package me.kjgleh.yes25.order.infra
 
 import com.appmattus.kotlinfixture.kotlinFixture
-import me.kjgleh.yes25.config.QueryDslTestConfiguration
+import me.kjgleh.yes25.config.QuerydslTestConfiguration
 import me.kjgleh.yes25.order.command.domain.Order
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Import
 import org.springframework.data.domain.PageRequest
 
 @DataJpaTest
-@Import(QueryDslTestConfiguration::class)
+@Import(QuerydslTestConfiguration::class)
 internal class OrderRepositoryImplTest @Autowired constructor(
     private val orderRepository: OrderRepository
 ) {
