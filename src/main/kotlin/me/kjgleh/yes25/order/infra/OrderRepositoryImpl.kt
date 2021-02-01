@@ -4,8 +4,8 @@ import com.querydsl.jpa.JPQLQuery
 import com.querydsl.jpa.impl.JPAQueryFactory
 import me.kjgleh.yes25.order.command.domain.Order
 import me.kjgleh.yes25.order.command.domain.QOrder.order
+import me.kjgleh.yes25.order.infra.dto.OrderLine
 import me.kjgleh.yes25.order.infra.dto.OrderView
-import me.kjgleh.yes25.order.infra.dto.QOrderView
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.Pageable
@@ -18,22 +18,30 @@ class OrderRepositoryImpl(private val queryFactory: JPAQueryFactory) :
         ordererId: String,
         pageable: Pageable
     ): Page<OrderView> {
-        val query: JPQLQuery<OrderView> = querydsl!!.applyPagination(
+        val query: JPQLQuery<Order> = querydsl!!.applyPagination(
             pageable,
             queryFactory
-                .select(
-                    QOrderView(
-                        order.orderNo.number,
-                        order.orderer.memberId.id,
-                        order.orderer.name
-                    )
-                )
-                .from(order)
+                .selectFrom(order)
                 .where(order.orderer.memberId.id.eq(ordererId))
         )
-        val items = query.fetch()
+
+        val orderList = query.fetch()
+        val orderViewList = orderList.map {
+            OrderView(
+                it.orderNo.number,
+                it.orderer.memberId.id,
+                it.orderer.name,
+                it.orderLines.map { orderLine ->
+                    OrderLine(
+                        productId = orderLine.productId,
+                        quantity = orderLine.quantity
+                    )
+                }
+            )
+        }
+
         val totalCount = query.fetchCount()
-        return PageImpl(items, pageable, totalCount)
+        return PageImpl(orderViewList, pageable, totalCount)
     }
 }
 
