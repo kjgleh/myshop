@@ -17,15 +17,15 @@ class SwaggerConfiguration {
         return Docket(DocumentationType.SWAGGER_2)
             .apiInfo(this.apiInfo())
             .select()
-            .apis(RequestHandlerSelectors.basePackage("me.kjgleh.yes25"))
+            .apis(RequestHandlerSelectors.basePackage("me.kjgleh.myshop"))
             .paths(PathSelectors.ant("/api/**"))
             .build()
     }
 
     private fun apiInfo(): ApiInfo {
         return ApiInfoBuilder()
-            .title("Yes25 API")
-//            .description("Yes25 API")
+            .title("Myshop API")
+//            .description("Myshop API")
             .build()
     }
 }

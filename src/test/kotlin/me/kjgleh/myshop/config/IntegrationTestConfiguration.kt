@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 
 @TestConfiguration
 @EnableJpaRepositories(basePackages = ["me.kjgleh.myshop"])
-@EntityScan(basePackages = ["me.kjgleh.yes25"])
+@EntityScan(basePackages = ["me.kjgleh.myshop"])
 @AutoConfigureDataJpa
 class IntegrationTestConfiguration
