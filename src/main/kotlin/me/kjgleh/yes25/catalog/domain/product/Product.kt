@@ -6,7 +6,6 @@ import java.util.*
 import javax.persistence.*
 
 @Entity
-@Table(name = "product")
 class Product(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

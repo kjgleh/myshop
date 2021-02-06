@@ -3,7 +3,6 @@ package me.kjgleh.yes25.board.domain
 import javax.persistence.*
 
 @Entity
-@Table(name = "article")
 @SecondaryTable(
     name = "article_content",
     pkJoinColumns = [PrimaryKeyJoinColumn(name = "id")]

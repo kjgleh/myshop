@@ -4,8 +4,7 @@ import me.kjgleh.yes25.order.command.service.dto.MemberInfo
 import me.kjgleh.yes25.order.command.service.dto.OrderInfo
 import javax.persistence.*
 
-@Entity
-@Table(name = "purchase_order")
+@Entity(name = "purchase_order")
 class Order(
     @EmbeddedId
     val orderNo: OrderNo,

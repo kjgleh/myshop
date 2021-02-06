@@ -1,13 +1,13 @@
 package me.kjgleh.yes25.order.infra.dto
 
-data class OrderView constructor(
+data class OrderView(
     val number: String,
     val ordererId: String,
     val ordererName: String,
     val orderLines: List<OrderLine>
 )
 
-data class OrderLine constructor(
+data class OrderLine(
     val productId: Long,
     val quantity: Int
 )

@@ -8,7 +8,6 @@ import javax.persistence.*
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "image_type")
 @EntityListeners(AuditingEntityListener::class)
-@Table(name = "image")
 abstract class Image(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
