@@ -5,7 +5,7 @@ import javax.persistence.*
 @Entity
 @SecondaryTable(
     name = "article_content",
-    pkJoinColumns = [PrimaryKeyJoinColumn(name = "seq")]
+    pkJoinColumns = [PrimaryKeyJoinColumn(name = "id")]
 )
 class Article(
     @Id

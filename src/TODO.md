@@ -1,5 +1,7 @@
-- swagger authorize 추가
-- 카카오싱크 적용
+- 환경설정 분리
+- 회원가입
+    - 카카오싱크 적용
+    - swagger authorize 추가
 - flyway 적용
 - 분산 트랜잭션 적용
 - redis
