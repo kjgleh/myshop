@@ -3,10 +3,12 @@ package me.kjgleh.myshop.member.domain
 import au.com.console.kassava.kotlinEquals
 import au.com.console.kassava.kotlinHashCode
 import java.io.Serializable
+import javax.persistence.Column
 import javax.persistence.Embeddable
 
 @Embeddable
 class MemberId(
+    @Column(name = "member_id")
     val id: String
 ) : Serializable {
 

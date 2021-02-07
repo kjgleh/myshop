@@ -9,7 +9,10 @@ import javax.persistence.*
 
 @Entity(name = "purchase_order")
 class Order(
-    @EmbeddedId
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long = 0L,
+
     val orderNo: OrderNo,
 
     @Embedded

@@ -7,8 +7,8 @@ import me.kjgleh.myshop.config.IntegrationTestConfiguration
 import me.kjgleh.myshop.member.domain.MemberId
 import me.kjgleh.myshop.order.command.domain.OrderNo
 import me.kjgleh.myshop.order.command.dto.OrderRequest
-import me.kjgleh.myshop.order.infra.OrderRepository
 import me.kjgleh.myshop.order.command.service.dto.MemberInfo
+import me.kjgleh.myshop.order.infra.OrderRepository
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito
@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.context.annotation.Import
-import org.springframework.data.repository.findByIdOrNull
 import java.util.*
 
 @SpringBootTest(classes = [PlaceOrderService::class, OrderRepository::class])
@@ -55,7 +54,7 @@ internal class PlaceOrderServiceTest @Autowired constructor(
 
         // Assert
         val actual =
-            orderRepository.findByIdOrNull(OrderNo(orderResponse.orderNo))
-        assertThat(actual).isNotNull
+            orderRepository.findByOrderNo(OrderNo(orderResponse.orderNo))
+        assertThat(actual).isNotEmpty
     }
 }

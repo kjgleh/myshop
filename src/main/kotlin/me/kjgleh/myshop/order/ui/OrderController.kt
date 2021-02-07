@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@Api(tags = ["Order"], description = " ")
+@Api(tags = ["Orders"], description = " ")
 class OrderController(
     private val placeOrderService: PlaceOrderService,
     private val memberRepository: MemberRepository
@@ -32,7 +32,7 @@ class OrderController(
 
         val orderResponse = placeOrderService.placeOrder(
             orderRequest,
-            MemberInfo(member.id, member.name)
+            MemberInfo(member.memberId, member.name)
         )
 
         return ResponseEntity.status(HttpStatus.CREATED).body(orderResponse)

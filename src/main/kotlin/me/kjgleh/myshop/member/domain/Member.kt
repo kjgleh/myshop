@@ -1,13 +1,14 @@
 package me.kjgleh.myshop.member.domain
 
-import javax.persistence.Embedded
-import javax.persistence.EmbeddedId
-import javax.persistence.Entity
+import javax.persistence.*
 
 @Entity
 class Member(
-    @EmbeddedId
-    val id: MemberId,
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long = 0L,
+
+    val memberId: MemberId,
 
     val name: String,
 
