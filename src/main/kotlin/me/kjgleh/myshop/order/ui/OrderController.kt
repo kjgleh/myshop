@@ -25,7 +25,7 @@ class OrderController(
         OrderRequestValidator.validate(orderRequest)
 
         val member =
-            memberRepository.findById(MemberId(orderRequest.orderer.memberId))
+            memberRepository.findByMemberId(MemberId(orderRequest.orderer.memberId))
                 .orElseThrow {
                     IllegalArgumentException("This member id does not exist.")
                 }
