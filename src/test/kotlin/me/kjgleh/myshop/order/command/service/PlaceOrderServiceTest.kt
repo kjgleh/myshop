@@ -19,8 +19,8 @@ import org.springframework.context.annotation.Import
 import org.springframework.data.repository.findByIdOrNull
 import java.util.*
 
-@Import(IntegrationTestConfiguration::class)
 @SpringBootTest(classes = [PlaceOrderService::class, OrderRepository::class])
+@Import(IntegrationTestConfiguration::class)
 internal class PlaceOrderServiceTest @Autowired constructor(
     private val placeOrderService: PlaceOrderService,
     private val orderRepository: OrderRepository
