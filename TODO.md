@@ -1,5 +1,6 @@
 - 환경설정 분리
 - 회원가입
+    - oauth2
     - 카카오싱크 적용
     - swagger authorize 추가
 - flyway 적용
