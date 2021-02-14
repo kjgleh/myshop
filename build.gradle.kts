@@ -29,6 +29,7 @@ dependencies {
     implementation("io.springfox:springfox-boot-starter:3.0.0")
     compileOnly("io.springfox:springfox-swagger-ui:3.0.0")
     runtimeOnly("com.h2database:h2")
+    runtimeOnly("mysql:mysql-connector-java")
     val queryDslVersion="4.4.0"
     implementation("com.querydsl:querydsl-jpa:${queryDslVersion}")
     kapt ("com.querydsl:querydsl-apt:${queryDslVersion}:jpa")
