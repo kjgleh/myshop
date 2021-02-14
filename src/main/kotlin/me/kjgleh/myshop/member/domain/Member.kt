@@ -2,7 +2,7 @@ package me.kjgleh.myshop.member.domain
 
 import javax.persistence.*
 
-@Entity
+@Entity(name = "myshop_member")
 class Member(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
