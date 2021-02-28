@@ -7,6 +7,7 @@ import me.kjgleh.myshop.order.command.dto.OrderRequest
 import me.kjgleh.myshop.order.command.service.PlaceOrderService
 import me.kjgleh.myshop.order.command.service.dto.MemberInfo
 import me.kjgleh.myshop.order.command.service.dto.OrderResponse
+import me.kjgleh.myshop.order.ui.exception.MemberNotFoundException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
@@ -27,7 +28,7 @@ class OrderController(
         val member =
             memberRepository.findByMemberId(MemberId(orderRequest.orderer.memberId))
                 .orElseThrow {
-                    IllegalArgumentException("This member id does not exist.")
+                    MemberNotFoundException("This member does not exist.")
                 }
 
         val orderResponse = placeOrderService.placeOrder(
