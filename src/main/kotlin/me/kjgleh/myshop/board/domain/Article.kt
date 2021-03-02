@@ -14,16 +14,6 @@ class Article(
 
     val title: String,
 
-    @AttributeOverrides(
-        AttributeOverride(
-            name = "content",
-            column = Column(table = "article_content")
-        ),
-        AttributeOverride(
-            name = "contentType",
-            column = Column(table = "article_content")
-        )
-    )
     @Embedded
     val articleContent: ArticleContent
 )
