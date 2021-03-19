@@ -17,7 +17,8 @@ logging:
 ---
 spring:
     profiles: local
-
+    datasource:
+        initialization-mode: embedded
 ---
 spring:
     profiles: stage
