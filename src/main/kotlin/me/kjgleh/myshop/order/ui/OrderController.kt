@@ -7,7 +7,7 @@ import me.kjgleh.myshop.order.command.dto.OrderRequest
 import me.kjgleh.myshop.order.command.service.PlaceOrderService
 import me.kjgleh.myshop.order.command.service.dto.MemberInfo
 import me.kjgleh.myshop.order.command.service.dto.OrderResponse
-import me.kjgleh.myshop.order.ui.exception.MemberNotFoundException
+import me.kjgleh.myshop.member.exception.MemberNotFoundException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping

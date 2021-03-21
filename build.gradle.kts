@@ -25,14 +25,24 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("au.com.console:kassava:2.1.0")
-    implementation("io.springfox:springfox-boot-starter:3.0.0")
-    compileOnly("io.springfox:springfox-swagger-ui:3.0.0")
+
     runtimeOnly("com.h2database:h2")
     runtimeOnly("mysql:mysql-connector-java")
+
+    implementation("au.com.console:kassava:2.1.0")
+
+    // swagger
+    implementation("io.springfox:springfox-boot-starter:3.0.0")
+    compileOnly("io.springfox:springfox-swagger-ui:3.0.0")
+
+    // querydsl
     val queryDslVersion="4.4.0"
     implementation("com.querydsl:querydsl-jpa:${queryDslVersion}")
     kapt ("com.querydsl:querydsl-apt:${queryDslVersion}:jpa")
+
+    // jwt
+    implementation("io.jsonwebtoken:jjwt:0.9.1")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }

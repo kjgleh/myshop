@@ -1,4 +1,4 @@
-package me.kjgleh.myshop.order.ui.exception
+package me.kjgleh.myshop.common.exception
 
 abstract class ServiceNotFoundException(message: String) :
     RuntimeException(message)

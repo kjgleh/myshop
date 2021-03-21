@@ -6,6 +6,8 @@ import springfox.documentation.builders.ApiInfoBuilder
 import springfox.documentation.builders.PathSelectors
 import springfox.documentation.builders.RequestHandlerSelectors
 import springfox.documentation.service.ApiInfo
+import springfox.documentation.service.ApiKey
+import springfox.documentation.service.SecurityScheme
 import springfox.documentation.spi.DocumentationType
 import springfox.documentation.spring.web.plugins.Docket
 
@@ -20,6 +22,11 @@ class SwaggerConfiguration {
             .apis(RequestHandlerSelectors.basePackage("me.kjgleh.myshop"))
             .paths(PathSelectors.ant("/api/**"))
             .build()
+            .securitySchemes(listOf(apiKey()))
+    }
+
+    private fun apiKey(): SecurityScheme {
+        return ApiKey("Bearer JWT", "Authorization", "header")
     }
 
     private fun apiInfo(): ApiInfo {
@@ -28,4 +35,5 @@ class SwaggerConfiguration {
 //            .description("Myshop API")
             .build()
     }
+
 }
