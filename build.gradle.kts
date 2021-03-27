@@ -43,6 +43,9 @@ dependencies {
     // jwt
     implementation("io.jsonwebtoken:jjwt:0.9.1")
 
+    // flyway
+    implementation("org.flywaydb:flyway-core")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }

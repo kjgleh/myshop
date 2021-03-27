@@ -1,0 +1,6 @@
+spring:
+    datasource:
+        # src/main/resources/data.sql 로 초기 데이터를 삽입하기 위해 아래 옵션을 추가해야 한다.
+        initialization-mode: embedded
+    flyway:
+        enabled: false
