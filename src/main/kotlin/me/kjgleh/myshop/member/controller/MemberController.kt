@@ -23,7 +23,10 @@ class MemberController(
         authorizations = [Authorization(value = "Bearer JWT")]
     )
     @GetMapping("/api/me")
-    fun me(@ApiIgnore @RequestHeader(name = "Authorization") authorization: String): ResponseEntity<MemberView> {
+    fun me(
+        @ApiIgnore
+        @RequestHeader(name = "Authorization") authorization: String
+    ): ResponseEntity<MemberView> {
         val memberView =
             findMemberService.findMember(authorization)
 
