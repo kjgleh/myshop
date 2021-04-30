@@ -1,6 +1,5 @@
 package me.kjgleh.myshop.common.exception
 
-import me.kjgleh.myshop.order.ui.exception.OrderProductEmptyException
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseStatus

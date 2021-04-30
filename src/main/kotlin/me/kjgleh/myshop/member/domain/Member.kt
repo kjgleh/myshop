@@ -10,8 +10,13 @@ class Member(
 
     val memberId: MemberId,
 
-    val name: String,
+    var name: String,
 
     @Embedded
     val password: Password
-)
+) {
+
+    fun update(name: String) {
+        this.name = name
+    }
+}
