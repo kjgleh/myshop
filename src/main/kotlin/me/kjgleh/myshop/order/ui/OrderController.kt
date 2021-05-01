@@ -4,6 +4,7 @@ import io.swagger.annotations.Api
 import me.kjgleh.myshop.member.domain.MemberId
 import me.kjgleh.myshop.member.exception.MemberNotFoundException
 import me.kjgleh.myshop.member.repository.MemberRepository
+import me.kjgleh.myshop.order.command.domain.OrderNo
 import me.kjgleh.myshop.order.command.dto.OrderRequest
 import me.kjgleh.myshop.order.command.service.PlaceOrderService
 import me.kjgleh.myshop.order.command.service.dto.MemberInfo
@@ -31,7 +32,9 @@ class OrderController(
                     MemberNotFoundException("This member does not exist.")
                 }
 
+        val orderNo = OrderNo.nextOrderNo()
         val orderResponse = placeOrderService.placeOrder(
+            orderNo,
             orderRequest,
             MemberInfo(member.memberId, member.name)
         )

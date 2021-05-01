@@ -2,59 +2,92 @@ package me.kjgleh.myshop.order.command.service
 
 import com.appmattus.kotlinfixture.kotlinFixture
 import com.nhaarman.mockitokotlin2.any
+import me.kjgleh.myshop.catalog.domain.product.Product
 import me.kjgleh.myshop.catalog.repository.ProductRepository
-import me.kjgleh.myshop.config.IntegrationTestConfiguration
-import me.kjgleh.myshop.member.domain.MemberId
+import me.kjgleh.myshop.order.command.domain.Order
+import me.kjgleh.myshop.order.command.domain.OrderLine
 import me.kjgleh.myshop.order.command.domain.OrderNo
+import me.kjgleh.myshop.order.command.dto.OrderProduct
 import me.kjgleh.myshop.order.command.dto.OrderRequest
 import me.kjgleh.myshop.order.command.service.dto.MemberInfo
+import me.kjgleh.myshop.order.command.service.dto.OrderInfo
+import me.kjgleh.myshop.order.command.service.dto.OrderResponse
 import me.kjgleh.myshop.order.infra.OrderRepository
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
+import org.mockito.ArgumentCaptor
+import org.mockito.InjectMocks
+import org.mockito.Mock
 import org.mockito.Mockito
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.mock.mockito.MockBean
-import org.springframework.context.annotation.Import
+import org.mockito.junit.jupiter.MockitoExtension
+import org.springframework.context.ApplicationEventPublisher
 import java.util.*
 
-@SpringBootTest(classes = [PlaceOrderService::class, OrderRepository::class])
-@Import(IntegrationTestConfiguration::class)
-internal class PlaceOrderServiceTest @Autowired constructor(
-    private val placeOrderService: PlaceOrderService,
-    private val orderRepository: OrderRepository
-) {
+@ExtendWith(MockitoExtension::class)
+internal class PlaceOrderServiceTest {
 
-    @MockBean
+    @Mock
+    private lateinit var orderRepository: OrderRepository
+
+    @Mock
     private lateinit var productRepository: ProductRepository
 
+    @Mock
+    private lateinit var eventPublisher: ApplicationEventPublisher
+
+    @InjectMocks
+    private lateinit var placeOrderService: PlaceOrderService
+
     companion object {
-        private val kotlinFixture = kotlinFixture()
+        private val fixture = kotlinFixture()
     }
 
     @Test
-    fun `place order`() {
+    fun `placeOrder correctly`() {
         // Arrange
-        val orderRequest = kotlinFixture<OrderRequest>()
-        val memberInfo = MemberInfo(
-            id = MemberId(UUID.randomUUID().toString()),
-            name = UUID.randomUUID().toString()
-        )
+        val orderNo = fixture<OrderNo>()
+        val orderProduct = fixture<OrderProduct>()
+        val orderRequest = fixture<OrderRequest> {
+            property(OrderRequest::orderProducts) {
+                listOf(orderProduct)
+            }
+        }
+        val memberInfo = fixture<MemberInfo>()
+        val product = fixture<Product>()
+        Mockito
+            .`when`(productRepository.findById(orderProduct.productId))
+            .thenReturn(
+                Optional.of(product)
+            )
 
-        Mockito.`when`(productRepository.findById(any())).thenReturn(
-            Optional.of(kotlinFixture())
+        val orderLines = orderRequest.orderProducts.map {
+            OrderLine.of(
+                productId = it.productId,
+                price = product.price,
+                quantity = it.quantity
+            )
+        }
+
+        val order = Order.of(
+            OrderInfo(orderNo, orderRequest, orderLines),
+            memberInfo
         )
 
         // Act
         val sut = placeOrderService
-        val orderResponse = sut.placeOrder(
-            orderRequest = orderRequest,
-            memberInfo = memberInfo
-        )
+        val actual = sut.placeOrder(orderNo, orderRequest, memberInfo)
 
         // Assert
-        val actual =
-            orderRepository.findByOrderNo(OrderNo(orderResponse.orderNo))
-        assertThat(actual).isNotEmpty
+        val argumentCaptorOrder: ArgumentCaptor<Order> =
+            ArgumentCaptor.forClass(Order::class.java)
+        Mockito.verify(orderRepository).save(argumentCaptorOrder.capture())
+        val argumentOrder = argumentCaptorOrder.value
+        assertThat(argumentOrder).usingRecursiveComparison()
+            .ignoringFields("orderNo")
+            .isEqualTo(order)
+
+        Mockito.verify(eventPublisher).publishEvent(any<OrderedEvent>())
+        assertThat(actual).isInstanceOf(OrderResponse::class.java)
     }
 }
