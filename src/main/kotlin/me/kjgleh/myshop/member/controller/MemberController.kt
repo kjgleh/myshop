@@ -34,6 +34,10 @@ class MemberController(
         return ResponseEntity.status(HttpStatus.OK).body(memberView)
     }
 
+    @ApiOperation(
+        value = "",
+        authorizations = [Authorization(value = "Bearer JWT")]
+    )
     @PutMapping("/api/me")
     fun updateMember(@RequestBody updateMemberRequest: UpdateMemberRequest): ResponseEntity<Unit> {
         updateMemberService.updateMember(updateMemberRequest)
