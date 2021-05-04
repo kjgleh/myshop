@@ -30,9 +30,7 @@ internal class MemberControllerTest {
     @MockBean
     private lateinit var updateMemberService: UpdateMemberService
 
-    companion object {
-        private val fixture = kotlinFixture()
-    }
+    private val fixture = kotlinFixture()
 
     @Test
     fun `me returns 200`() {

@@ -39,9 +39,7 @@ internal class PlaceOrderServiceTest {
     @InjectMocks
     private lateinit var placeOrderService: PlaceOrderService
 
-    companion object {
-        private val fixture = kotlinFixture()
-    }
+    private val fixture = kotlinFixture()
 
     @Test
     fun `placeOrder correctly`() {

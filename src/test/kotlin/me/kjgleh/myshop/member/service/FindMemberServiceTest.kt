@@ -23,9 +23,7 @@ internal class FindMemberServiceTest @Autowired constructor(
     @MockBean
     private lateinit var memberRepository: MemberRepository
 
-    companion object {
-        private val fixture = kotlinFixture()
-    }
+    private val fixture = kotlinFixture()
 
     @Test
     fun `given authorization is invalid when findMember then throw MemberNotFoundException`() {

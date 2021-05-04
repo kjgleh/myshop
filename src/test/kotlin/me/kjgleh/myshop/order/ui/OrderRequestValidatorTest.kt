@@ -8,9 +8,7 @@ import org.junit.jupiter.api.assertThrows
 
 internal class OrderRequestValidatorTest {
 
-    companion object {
-        private val fixture = kotlinFixture()
-    }
+    private val fixture = kotlinFixture()
 
     @Test
     fun `given orderProduct is empty when order request validate then throw OrderProductEmptyException`() {

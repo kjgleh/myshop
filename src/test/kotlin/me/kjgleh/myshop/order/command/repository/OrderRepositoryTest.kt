@@ -16,9 +16,7 @@ internal class OrderRepositoryTest @Autowired constructor(
     private val orderRepository: OrderRepository
 ) {
 
-    companion object {
-        private val kotlinFixture = kotlinFixture()
-    }
+    private val kotlinFixture = kotlinFixture()
 
     @Test
     fun `save order correctly`() {

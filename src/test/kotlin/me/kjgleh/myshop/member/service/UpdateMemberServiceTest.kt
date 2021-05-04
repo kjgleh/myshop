@@ -23,9 +23,7 @@ internal class UpdateMemberServiceTest {
     @InjectMocks
     private lateinit var updateMemberService: UpdateMemberService
 
-    companion object {
-        private val fixture = kotlinFixture()
-    }
+    private val fixture = kotlinFixture()
 
     @Test
     fun `updateMember correctly`() {

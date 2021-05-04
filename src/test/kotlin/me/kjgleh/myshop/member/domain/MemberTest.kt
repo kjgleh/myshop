@@ -6,9 +6,7 @@ import org.junit.jupiter.api.Test
 
 internal class MemberTest {
 
-    companion object {
-        private val fixture = kotlinFixture()
-    }
+    private val fixture = kotlinFixture()
 
     @Test
     fun `update member correctly`() {
