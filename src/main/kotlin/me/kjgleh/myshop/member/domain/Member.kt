@@ -4,17 +4,20 @@ import javax.persistence.*
 
 @Entity(name = "myshop_member")
 class Member(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0L,
-
     val memberId: MemberId,
 
-    var name: String,
-
     @Embedded
-    val password: Password
+    val password: Password,
+
+    name: String
 ) {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long = 0L
+
+    var name: String = name
+        protected set
 
     fun update(name: String) {
         this.name = name
