@@ -3,7 +3,7 @@ spring:
         driver-class-name: com.mysql.cj.jdbc.Driver
         url: jdbc:mysql://localhost:53306/myshop?useSSL=false&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
         username: root
-        password: 1234
+        password:
     jpa:
         properties:
             hibernate:
