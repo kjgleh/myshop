@@ -28,7 +28,7 @@ internal class ArticleRepositoryTest @Autowired constructor(
 
         // Assert
         val actual = sut.findAll()
-        assertThat(actual.size).isEqualTo(1)
+        assertThat(actual.size).isEqualTo(2)
     }
 
 }
