@@ -41,6 +41,7 @@ dependencies {
     val queryDslVersion="4.4.0"
     implementation("com.querydsl:querydsl-jpa:${queryDslVersion}")
     kapt ("com.querydsl:querydsl-apt:${queryDslVersion}:jpa")
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
     // jwt
     implementation("io.jsonwebtoken:jjwt:0.9.1")
