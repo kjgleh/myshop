@@ -47,8 +47,9 @@ internal class CountryRepositoryImplTest @Autowired constructor(
 
         // Act
         val actual =
-            countryRepository.findTupleAndContinentByCountryName(
-                countryName
+            countryRepository.findTupleAndContinentByIdAndCountryName(
+                country.id,
+                country.name
             )
 
         // Assert

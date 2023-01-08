@@ -5,7 +5,7 @@ import com.querydsl.core.Tuple
 interface CountryRepositoryCustom {
 
     fun findByName(name: String): Country?
-    fun findTupleAndContinentByCountryName(name: String): Tuple?
+    fun findTupleAndContinentByIdAndCountryName(id: Long, name: String): Tuple?
     fun findCountry1(countryId: Long): CountryAndContinentDto?
     fun findByContinent(continentId: Long): List<Country>
     fun findByContinent2(continentId: Long): List<Country>

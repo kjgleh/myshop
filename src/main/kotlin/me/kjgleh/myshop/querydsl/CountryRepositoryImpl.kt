@@ -18,12 +18,15 @@ class CountryRepositoryImpl(
     }
 
     // Tuple, innerJoin
-    override fun findTupleAndContinentByCountryName(name: String): Tuple? {
+    override fun findTupleAndContinentByIdAndCountryName(id: Long, name: String): Tuple? {
         val tuple = queryFactory
             .select(country.id, country.name, continent)
             .from(country)
             .innerJoin(country.continent, continent)
-            .where(country.name.eq(name))
+            .where(
+                country.id.eq(id),
+                country.name.eq(name)
+            )
             .fetchOne()
 
         println(tuple?.get(country.id))
